@@ -43,7 +43,13 @@
                       <td><?php echo $k->nama_kategori;?></td>
                       <td><?php echo $k->deskripsi_kategori;?></td>
                       <td>
-						  <a class="btn btn-danger" href="<?php echo base_url()."admin/hapus_kategori/".$k->id_kategori;?>">
+						  <a class="btn btn-warning btn-sm" href="<?php echo base_url()."admin/form_ubah_kategori/".$k->id_kategori;?>">
+              <i class="fas fa-fw fa-edit"></i>
+              <span>Ubah</span>
+              </a>
+              <br>
+
+              <a class="btn btn-danger btn-sm" href="<?php echo base_url()."admin/hapus_kategori/".$k->id_kategori;?>">
 							<i class="fas fa-fw fa-trash"></i>
 							<span>Hapus</span>
 						  </a>

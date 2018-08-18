@@ -266,6 +266,15 @@ class Admin extends CI_Controller {
 		redirect('admin/kategori');
 	}
 
+	public function form_ubah_kategori($id)
+	{
+		$this->ceklogin();
+		$this->load->model('Kategori_model');
+		$notifikasi = $this->Kategori_model->delete($id);
+		$this->session->set_flashdata('msg', 'Data berhasil dihapus.');
+		redirect('admin/kategori');
+	}
+
 	public function profil()
 	{
 		$this->ceklogin();
