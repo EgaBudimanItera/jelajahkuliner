@@ -270,9 +270,10 @@ class Admin extends CI_Controller {
 	{
 		$this->ceklogin();
 		$this->load->model('Kategori_model');
-		$notifikasi = $this->Kategori_model->delete($id);
-		$this->session->set_flashdata('msg', 'Data berhasil dihapus.');
-		redirect('admin/kategori');
+		$data=array(
+			'list'=>$this->Kategori_model->get_where('id_kategori',$id)->row(),
+		);
+		$this->load->view('admin/kategori_ubah',$data);
 	}
 
 	public function profil()
