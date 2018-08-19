@@ -14,7 +14,7 @@ class Kuliner extends CI_Controller {
 		$kuliner = $this->Kuliner_model->getById($id);
 		
 		$data = array('link' => 'kuliner', 
-					'kuliner' => $kuliner,
+					'k' => $kuliner,
 					'lat' => $lat,
 					'lng' => $lng
 					);

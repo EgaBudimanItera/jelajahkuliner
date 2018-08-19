@@ -18,7 +18,6 @@
 			<!-- Main Content -->
 			<div class="container">
 				<div class="row">
-				<?php foreach($kuliner AS $k) { ?>
 					<div class="12u">
 						<div class="incbox3">
 						<font size="5"><?php echo $k->nama_kuliner;?></font><br />
@@ -78,7 +77,6 @@
 							<?php } ?>
 					<hr />
 					</div>
-				<?php } ?>
 				</div>
 			
 			
