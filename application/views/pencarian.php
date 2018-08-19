@@ -123,7 +123,8 @@
 									//Create the marker.
 									markerL = new google.maps.Marker({
 										position: clickedLocation,
-										map: map
+										map: map,
+										draggable:true
 									});
 									//Listen for drag events!
 									google.maps.event.addListener(markerL, 'dragend', function(event){

@@ -5,13 +5,13 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item active">Lokasi Kuliner</li>
-            <li class="breadcrumb-item active">Tambah</li>
+            <li class="breadcrumb-item active">Ubah</li>
           </ol>
 
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-plus-square"></i>
-              Tambah Lokasi Kategori</div>
+              Ubah Lokasi Kategori</div>
             <div class="card-body">
 			<?php if($this->session->flashdata('msg')!=NULL){?>
 			<div class="alert alert-warning">
@@ -19,11 +19,12 @@
 			</div>
 			<?php } ?>
 				<br />
-			<form action="<?php echo base_url()."admin/proses_tambah_kuliner";?>" method="post" enctype="multipart/form-data">
+			<form action="<?php echo base_url()."admin/proses_ubah_kuliner";?>" method="post" enctype="multipart/form-data">
+			<input type="hidden" value="<?php echo $kuliner->id_kuliner?>" name="id_kuliner">
 			  <div class="form-group row">
 				<label for="nama" class="col-sm-2 col-form-label">Nama Lokasi Kuliner</label>
 				<div class="col-sm-3">
-				  <input type="text" class="form-control" id="nama" name="nama">
+				  <input type="text" class="form-control" id="nama" name="nama" value="<?php echo $kuliner->nama_kuliner;?>">
 				</div>
 			  </div>
 			  <div class="form-group row">
@@ -39,23 +40,29 @@
 			  <div class="form-group row">
 				<label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi Tempat Kuliner</label>
 				<div class="col-sm-5">
-				  <textarea class="form-control" id="deskripsi" name="deskripsi"></textarea>
+				  <textarea class="form-control" id="deskripsi" name="deskripsi"><?php echo $kuliner->deskripsi_kuliner;?></textarea>
 				</div>
 			  </div>
 			  <div class="form-group row">
 				<label for="menu" class="col-sm-2 col-form-label">Menu Andalan</label>
 				<div class="col-sm-3">
-				  <input type="text" class="form-control" id="menu" name="menu">
+				  <input type="text" class="form-control" id="menu" name="menu" value="<?php echo $kuliner->menu_andalan;?>">
 				</div>
 			  </div>
 			  <div class="form-group row">
 				<label for="kisaran" class="col-sm-2 col-form-label">Kisaran Harga</label>
 				<div class="col-sm-3">
-				  <input type="text" class="form-control" id="kisaran" name="kisaran">
+				  <input type="text" class="form-control" id="kisaran" name="kisaran" value="<?php echo $kuliner->kisaran_harga;?>">
 				</div>
 			  </div>
 			  <div class="form-group row">
 				<label for="foto" class="col-sm-2 col-form-label">Gambar Kuliner</label>
+				<div class="col-sm-3">
+				  <img src="<?php echo base_url()."assets/images/".$kuliner->foto_kuliner;?>" height="150px">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto" class="col-sm-2 col-form-label"></label>
 				<div class="col-sm-3">
 				  <input type="file" class="form-control-file" id="foto" name="foto">
 				</div>
@@ -63,7 +70,7 @@
 			  <div class="form-group row">
 				<label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
 				<div class="col-sm-5">
-				  <input type="text" class="form-control" id="alamat" name="alamat">
+				  <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $kuliner->alamat;?>">
 				</div>
 			  </div>
 			  <div class="form-group row">
@@ -97,7 +104,7 @@
 						  
 						  function initMap() {
 							map = new google.maps.Map(document.getElementById('map'), {
-							  center: {lat: -5.4104608, lng: 105.2801762},
+							  center: {lat: <?php echo $kuliner->lat_kuliner;?>, lng: <?php echo $kuliner->lng_kuliner;?>},
 							  zoom: 13
 							});
 						  
@@ -160,6 +167,17 @@
 							  map.fitBounds(bounds);
 							});
 							
+							var markerL=new google.maps.Marker({
+							  position: new google.maps.LatLng(<?php echo $kuliner->lat_kuliner.",".$kuliner->lng_kuliner;?>),
+							  map: map,
+							  draggable:true
+							});
+							
+							//Listen for drag events!
+							google.maps.event.addListener(markerL, 'dragend', function(event){
+								markerLocation();
+							});
+							
 							//Listen for any clicks on the map.
 							google.maps.event.addListener(map, 'click', function(event) {                
 								//Get the location that the user clicked.
@@ -169,7 +187,8 @@
 									//Create the marker.
 									markerL = new google.maps.Marker({
 										position: clickedLocation,
-										map: map
+										map: map,
+										draggable:true
 									});
 									//Listen for drag events!
 									google.maps.event.addListener(markerL, 'dragend', function(event){
@@ -201,13 +220,13 @@
 			  <div class="form-group row">
 				<label for="lat" class="col-sm-2 col-form-label">Latitude</label>
 				<div class="col-sm-3">
-				  <input type="text" class="form-control" id="lat" name="lat">
+				  <input type="text" class="form-control" id="lat" name="lat" value="<?php echo $kuliner->lat_kuliner;?>">
 				</div>
 			  </div>
 			  <div class="form-group row">
 				<label for="long" class="col-sm-2 col-form-label">Longitude</label>
 				<div class="col-sm-3">
-				  <input type="text" class="form-control" id="lng" name="lng">
+				  <input type="text" class="form-control" id="lng" name="lng" value="<?php echo $kuliner->lng_kuliner;?>">
 				</div>
 			  </div>
             <div class="form-group row">

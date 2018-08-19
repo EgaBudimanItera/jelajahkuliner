@@ -13,7 +13,7 @@ class Kuliner_model extends CI_Model {
 		$this->db->where('kuliner.id_kuliner', $id);
 		$this->db->join('kategori', 'kuliner.id_kategori = kategori.id_kategori', 'left');
 		$query = $this->db->get('kuliner');
-		return $query->result();
+		return $query->row();
 	}
 
 	public function getByKategori($k)
@@ -28,6 +28,11 @@ class Kuliner_model extends CI_Model {
 	{
 		return $this->db->insert('kuliner', $data);
 	}
+	
+	public function update($data, $id){       
+        $this->db->where('id_kuliner', $id);
+        return $this->db->update('kuliner', $data); 
+    }
 
 	public function delete($id)
 	{

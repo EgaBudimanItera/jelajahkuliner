@@ -49,7 +49,12 @@
                       <td><?php echo $k->deskripsi_kuliner;?></td>
                       <td><?php echo $k->alamat;?></td>
                       <td>
-						  <a class="btn btn-danger" href="<?php echo base_url()."admin/hapus_kuliner/".$k->id_kuliner;?>">
+						  <a class="btn btn-warning btn-sm" href="<?php echo base_url()."admin/ubah_kuliner/".$k->id_kuliner;?>">
+							<i class="fas fa-fw fa-edit"></i>
+							<span>Ubah</span>
+						  </a>
+						  <br />
+						  <a class="btn btn-danger btn-sm" href="<?php echo base_url()."admin/hapus_kuliner/".$k->id_kuliner;?>">
 							<i class="fas fa-fw fa-trash"></i>
 							<span>Hapus</span>
 						  </a>
