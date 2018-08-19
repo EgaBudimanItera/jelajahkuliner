@@ -24,24 +24,49 @@
 				<label> <i class="icon fa fa-exclamation-circle"></i> <?php echo $this->session->flashdata('msg'); ?></label>
 			</blockquote>
 			<?php } ?>
-					<p>Klik pada peta lokasi Anda saat ini:</p>
 						<form action = "<?php echo base_url()."kulinerpencarian";?>" method="get">
+							  Lokasi Anda saat ini: <span id="myaddress"></span>
 							  <input type="hidden" class="form-control" id="lat" name="lat">
 							  <input type="hidden" class="form-control" id="lng" name="lng">
-							  <input type="text" name="current_location" id="pac-input" size="100"/> 
-							  <input type="submit" value="Cari lokasi terdekat" />
+							  <input type="submit" value="Cari Kuliner Terdekat" />
 						</form><br /><br />
+						<br />
+						
+						<center><p><strong>Klik lokasi Anda saat ini pada peta!</strong></p></center>
+						<input type="text" name="current_location" id="pac-input" size="100"/> 
 						<div id="mapPencarian"></div>
+						<style>
+						  #pac-input {
+							background-color: #fff;
+							font-family: Roboto;
+							font-size: 15px;
+							font-weight: 300;
+							margin-left: 12px;
+							padding: 0 11px 0 13px;
+							text-overflow: ellipsis;
+							width: 400px;
+						  }
+
+						  #pac-input:focus {
+							border-color: #4d90fe;
+						  }
+
+						</style>
 						<script>
-						
-						
-						
-						  var map;
+						  var map, infoWindow;
 						  var markerL = false;
 						  
 						  function initMap() {
 							map = new google.maps.Map(document.getElementById('mapPencarian'), {
-							  center: {lat: -5.4104608, lng: 105.2801762},
+								<?php 
+								$lat = $this->input->get('lat');
+								$lng = $this->input->get('lng');
+								if (!empty($lat) && !empty($lng)) { ?>
+								center: {lat: <?php echo $lat;?>, lng: <?php echo $lng;?>},
+								<?php } else { ?>
+								center: {lat: -5.4104608, lng: 105.2801762},	
+								<?php } ?>
+							  
 							  zoom: 13
 							});
 							var image = '<?php echo base_url();?>assets/images/mapmarker.png';
@@ -59,6 +84,7 @@
 							// Create the search box and link it to the UI element.
 							var input = document.getElementById('pac-input');
 							var searchBox = new google.maps.places.SearchBox(input);
+							map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 							
 							// Bias the SearchBox results towards current map's viewport.
 							map.addListener('bounds_changed', function() {
@@ -114,6 +140,19 @@
 							  map.fitBounds(bounds);
 							});
 							
+							<?php if (!empty($lat) && !empty($lng)) { ?>
+							var markerL=new google.maps.Marker({
+							  position: new google.maps.LatLng(<?php echo $lat.",".$lng;?>),
+							  map: map,
+							  draggable:true
+							});
+							
+							//Listen for drag events!
+							google.maps.event.addListener(markerL, 'dragend', function(event){
+								markerLocation();
+							});
+							<?php } ?>
+							
 							//Listen for any clicks on the map.
 							google.maps.event.addListener(map, 'click', function(event) {                
 								//Get the location that the user clicked.
@@ -138,7 +177,8 @@
 								markerLocation();
 							});
 						
-								
+							var geocoder = new google.maps.Geocoder;
+
 							//This function will get the marker's current location and then add the lat/long
 							//values to our textfields so that we can save the location.
 							function markerLocation(){
@@ -147,7 +187,57 @@
 								//Add lat and lng values to a field that we can save.
 								document.getElementById('lat').value = currentLocation.lat(); //latitude
 								document.getElementById('lng').value = currentLocation.lng(); //longitude
+								
+								  geocoder.geocode({'location': currentLocation}, function(results, status) {
+								  if (status === 'OK') {
+									if (results[0]) {
+										document.getElementById('myaddress').innerHTML  = results[0].formatted_address;
+									}
+								  }
+								  });
+
+								
 							}
+							
+						    infoWindow = new google.maps.InfoWindow;
+
+							// Try HTML5 geolocation.
+							if (navigator.geolocation) {
+							  navigator.geolocation.getCurrentPosition(function(position) {
+								var pos = {
+								  lat: position.coords.latitude,
+								  lng: position.coords.longitude
+								};
+								
+								markerL = new google.maps.Marker({
+								  position: pos,
+								  map: map,
+								  draggable:true
+								});
+								
+								//Listen for drag events!
+								google.maps.event.addListener(markerL, 'dragend', function(event){
+									markerLocation();
+								});
+								
+								map.setCenter(pos);
+								markerLocation();
+							  }, function() {
+								//handleLocationError(true, infoWindow, map.getCenter());
+							  });
+							} else {
+							  // Browser doesn't support Geolocation
+							  //handleLocationError(false, infoWindow, map.getCenter());
+							}
+
+						  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+							infoWindow.setPosition(pos);
+							infoWindow.setContent(browserHasGeolocation ?
+												  'Error: The Geolocation service failed.' :
+												  'Error: Your browser doesn\'t support geolocation.');
+							infoWindow.open(map);
+						  }
+
 						  
 						  }
 						  

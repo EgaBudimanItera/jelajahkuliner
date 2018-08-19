@@ -19,7 +19,9 @@
 			<div class="container">
 				<div class="row">
 				<div class="12u">
-						<form action = "<?php echo base_url()."pencarian";?>">
+						<form action = "<?php echo base_url()."pencarian";?>" method="get">
+							  <input type="hidden" name="lat" value="<?php echo $lat;?>" />
+							  <input type="hidden" name="lng" value="<?php echo $lng;?>" />
 							  <input type="submit" value="Kembali" />
 						</form><br /><br />
 				</div>

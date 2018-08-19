@@ -81,7 +81,7 @@
 					<div id="map"></div>
 				</div>
 			  </div>
-<style>
+	<style>
       #pac-input {
         background-color: #fff;
         font-family: Roboto;
@@ -97,7 +97,7 @@
         border-color: #4d90fe;
       }
 
-	 </style>
+	</style>
     <script>
 						  var map;
 						  var markerL = false;
