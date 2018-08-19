@@ -25,6 +25,7 @@
 				<label for="nama" class="col-sm-2 col-form-label">Nama Kategori</label>
 				<div class="col-sm-3">
 				  <input type="text" class="form-control" id="nama" value="<?=$list->nama_kategori?>" name="nama">
+				  <input type="hidden" class="form-control" id="id_kategori" value="<?=$list->id_kategori?>" name="id_kategori">
 				</div>
 			  </div>
 			  <div class="form-group row">
@@ -41,8 +42,9 @@
 			  </div>
 			  <div class="form-group row">
 				<label for="foto" class="col-sm-2 col-form-label">Gambar Kategori Ubah</label>
-				<div class="col-sm-3">
-				  <input type="file" class="form-control-file" id="foto" name="foto"> <span><?=$list->foto_kategori?></span>
+				<div class="col-sm-6">
+				  <input type="file" class="form-control-file" id="foto" name="foto"> 
+				  <input type="hidden" class="form-control" id="gambarlama" value="<?=$list->foto_kategori?>" name="gambarlama">
 				</div>
 			  </div>
             <div class="form-group row">

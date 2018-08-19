@@ -21,4 +21,10 @@ class Kategori_model extends CI_Model {
 		$query = $this->db->get_where('kategori', array($paramid => $id));
 		return $query;
 	}
+
+	function update($param_kode, $kode, $data){       
+        $this->db->where($param_kode, $kode);
+        $this->db->update('kategori', $data); 
+        return true;
+    }
 }

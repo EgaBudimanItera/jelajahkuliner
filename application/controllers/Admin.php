@@ -276,6 +276,69 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/kategori_ubah',$data);
 	}
 
+	public function proses_ubah_kategori()
+	{
+		$this->ceklogin();
+		$id = $this->input->post('id_kategori');
+		$nama = $this->input->post('nama');
+		$deskripsi = $this->input->post('deskripsi');
+		$fotolama = $this->input->post('gambarlama');
+		
+		if (empty($nama)) {
+            $this->session->set_flashdata('msg', 'Nama Kategori tidak boleh kosong.');
+            redirect('admin/form_ubah_kategori');
+			exit();
+		}
+		
+		if (empty($deskripsi)) {
+            $this->session->set_flashdata('msg', 'Deskripsi Kategori tidak boleh kosong.');
+            redirect('admin/form_ubah_kategori');
+			exit();
+		}
+		$file=$_FILES['foto']['name'];
+		if($file!="") {
+
+			$config['upload_path'] = 'assets/images/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size'] = '2048000';
+			
+			$this->load->library('upload', $config);
+			if($this->upload->do_upload('foto'))
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$foto = $data['upload_data']['file_name'];
+			}
+			else
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('msg', print_r($error, true));
+				redirect('admin/form_ubah_kategori');
+				exit();
+			}
+
+		} else {
+
+			$foto = $fotolama;
+
+		}
+			
+		
+		$this->load->model('Kategori_model');
+		$data = array(
+					'nama_kategori' => $nama,
+					'deskripsi_kategori' => $deskripsi,
+					'foto_kategori' => $foto,
+				);
+		$result = $this->Kategori_model->update('id_kategori',$id,$data);
+		if ($result) {
+			$this->session->set_flashdata('msg', 'Kategori berhasil diubah.');
+			redirect('admin/kategori');	
+		} else {
+			$this->session->set_flashdata('msg', 'Terjadi Kesalahan. Data tidak berhasil diubah.');
+			redirect('admin/form_ubah_kategori');
+		}
+	}
+
 	public function profil()
 	{
 		$this->ceklogin();
