@@ -168,7 +168,7 @@ class admin extends CI_Controller {
 		$config['max_size'] = '2048000';
 		
 		$this->load->library('upload', $config);
-		if($this->upload->do_upload('foto'))
+		if($this->upload->do_upload('foto_kuliner1'))
 		{
 			$data = array('upload_data' => $this->upload->data());
 			$foto = $data['upload_data']['file_name'];
