@@ -55,9 +55,27 @@
 				</div>
 			  </div>
 			  <div class="form-group row">
-				<label for="foto" class="col-sm-2 col-form-label">Gambar Kuliner</label>
-				<div class="col-sm-3">
-				  <input type="file" class="form-control-file" id="foto" name="foto">
+				<label for="foto" class="col-sm-2 col-form-label">Gambar Kuliner 1</label>
+				<div class="col-sm-6">
+				  <input type="file" class="form-control-file" id="foto_kuliner1" name="foto_kuliner1">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto" class="col-sm-2 col-form-label">Gambar Kuliner 2</label>
+				<div class="col-sm-6">
+				  <input type="file" class="form-control-file" id="foto_kuliner2" name="foto_kuliner2">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto" class="col-sm-2 col-form-label">Gambar Kuliner 3</label>
+				<div class="col-sm-6">
+				  <input type="file" class="form-control-file" id="foto_kuliner3" name="foto_kuliner3">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto" class="col-sm-2 col-form-label">Gambar Kuliner 4</label>
+				<div class="col-sm-6">
+				  <input type="file" class="form-control-file" id="foto_kuliner4" name="foto_kuliner4">
 				</div>
 			  </div>
 			  <div class="form-group row">
