@@ -23,9 +23,47 @@
 						<font size="5"><?php echo $k->nama_kuliner;?></font><br />
 						</div>
 						<div class="row">
-							<div class="4u">
+							<?php
+							   if(!empty($k->foto_kuliner)){
+
+							?>
+							<div class="8u">
 							<img src="<?php echo base_url()."assets/images/".$k->foto_kuliner;?>" width="400px">
 							</div>
+							<?php
+							   }
+							?>
+							<?php
+							   if(!empty($k->foto_kuliner2)){
+
+							?>
+							<div class="8u">
+							<img src="<?php echo base_url()."assets/images/".$k->foto_kuliner2;?>" width="400px">
+							</div>
+							<?php
+							   }
+							?>
+							<?php
+							   if(!empty($k->foto_kuliner3)){
+
+							?>
+
+							<div class="8u">
+							<img src="<?php echo base_url()."assets/images/".$k->foto_kuliner3;?>" width="400px">
+							</div>
+							<?php
+							   }
+							?>
+							<?php
+							   if(!empty($k->foto_kuliner4)){
+
+							?>
+							<div class="8u">
+							<img src="<?php echo base_url()."assets/images/".$k->foto_kuliner4;?>" width="400px">
+							</div>
+							<?php
+							   }
+							?>
 							<div class="8u">
 								<p><strong><font size="3" color="green">Menu andalan: <?php echo $k->menu_andalan;?></font></strong></p>
 								<?php 

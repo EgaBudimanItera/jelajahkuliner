@@ -32,7 +32,7 @@
 						</div>
 						<div class="row">
 							<div class="3u">
-							<img src="<?php echo base_url()."assets/images/".$k->foto_kuliner;?>" height="150px">
+							<img src="<?php echo base_url()."assets/images/".$k->foto_kuliner;?>" height="150px" width="300px">
 							</div>
 							<div class="9u">
 								<p><strong><font size="3" color="green">Menu andalan: <?php echo $k->menu_andalan;?></font></strong></p>
