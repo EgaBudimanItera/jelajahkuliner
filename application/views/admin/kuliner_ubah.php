@@ -56,15 +56,51 @@
 				</div>
 			  </div>
 			  <div class="form-group row">
-				<label for="foto" class="col-sm-2 col-form-label">Gambar Kuliner</label>
+				<label for="foto1" class="col-sm-2 col-form-label">Gambar Kuliner</label>
 				<div class="col-sm-3">
 				  <img src="<?php echo base_url()."assets/images/".$kuliner->foto_kuliner;?>" height="150px">
 				</div>
 			  </div>
 			  <div class="form-group row">
-				<label for="foto" class="col-sm-2 col-form-label"></label>
+				<label for="foto1" class="col-sm-2 col-form-label"></label>
 				<div class="col-sm-3">
-				  <input type="file" class="form-control-file" id="foto" name="foto">
+				  <input type="file" class="form-control-file" id="foto1" name="foto1">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto2" class="col-sm-2 col-form-label">Gambar Kuliner 2</label>
+				<div class="col-sm-3">
+				  <img src="<?php echo base_url()."assets/images/".$kuliner->foto_kuliner2;?>" height="150px">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto2" class="col-sm-2 col-form-label"></label>
+				<div class="col-sm-3">
+				  <input type="file" class="form-control-file" id="foto2" name="foto2">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto3" class="col-sm-2 col-form-label">Gambar Kuliner 3</label>
+				<div class="col-sm-3">
+				  <img src="<?php echo base_url()."assets/images/".$kuliner->foto_kuliner3;?>" height="150px">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto3" class="col-sm-2 col-form-label"></label>
+				<div class="col-sm-3">
+				  <input type="file" class="form-control-file" id="foto3" name="foto3">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto4" class="col-sm-2 col-form-label">Gambar Kuliner 4</label>
+				<div class="col-sm-3">
+				  <img src="<?php echo base_url()."assets/images/".$kuliner->foto_kuliner4;?>" height="150px">
+				</div>
+			  </div>
+			  <div class="form-group row">
+				<label for="foto4" class="col-sm-2 col-form-label"></label>
+				<div class="col-sm-3">
+				  <input type="file" class="form-control-file" id="foto4" name="foto4">
 				</div>
 			  </div>
 			  <div class="form-group row">

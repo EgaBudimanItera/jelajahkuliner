@@ -114,6 +114,9 @@ class admin extends CI_Controller {
 		$lat = $this->input->post('lat');
 		$lng = $this->input->post('lng');
 		$foto = "";
+		$foto2 = "";
+		$foto3 = "";
+		$foto4 = "";
 		
 		if (empty($nama)) {
             $this->session->set_flashdata('msg', 'Nama Tempat Kuliner tidak boleh kosong.');
@@ -181,6 +184,51 @@ class admin extends CI_Controller {
 			exit();
 		}
 		
+		if (isset($_FILES['foto_kuliner2']) AND $_FILES['foto_kuliner2']['tmp_name'] != "") {
+			if($this->upload->do_upload('foto_kuliner2'))
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$foto2 = $data['upload_data']['file_name'];
+			}
+			else
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('msg', print_r($error, true));
+				redirect('admin/tambah_kuliner');
+				exit();
+			}
+		}
+		
+		if (isset($_FILES['foto_kuliner3']) AND $_FILES['foto_kuliner3']['tmp_name'] != "") {
+			if($this->upload->do_upload('foto_kuliner3'))
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$foto3 = $data['upload_data']['file_name'];
+			}
+			else
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('msg', print_r($error, true));
+				redirect('admin/tambah_kuliner');
+				exit();
+			}
+		}
+		
+		if (isset($_FILES['foto_kuliner4']) AND $_FILES['foto_kuliner4']['tmp_name'] != "") {
+			if($this->upload->do_upload('foto_kuliner4'))
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$foto4 = $data['upload_data']['file_name'];
+			}
+			else
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('msg', print_r($error, true));
+				redirect('admin/tambah_kuliner');
+				exit();
+			}
+		}
+		
 		$this->load->model('Kuliner_model');
 		$data = array(
 					'nama_kuliner' => $nama,
@@ -189,6 +237,9 @@ class admin extends CI_Controller {
 					'kisaran_harga' => $kisaran,
 					'alamat' => $alamat,
 					'foto_kuliner' => $foto,
+					'foto_kuliner2' => $foto2,
+					'foto_kuliner3' => $foto3,
+					'foto_kuliner4' => $foto4,
 					'id_kategori' => $kategori,
 					'lat_kuliner' => $lat,
 					'lng_kuliner' => $lng,
@@ -217,6 +268,9 @@ class admin extends CI_Controller {
 		$lat = $this->input->post('lat');
 		$lng = $this->input->post('lng');
 		$foto = "";
+		$foto2 = "";
+		$foto3 = "";
+		$foto4 = "";
 		
 		if (empty($nama)) {
             $this->session->set_flashdata('msg', 'Nama Tempat Kuliner tidak boleh kosong.');
@@ -266,12 +320,13 @@ class admin extends CI_Controller {
 			exit();
 		}
 		
+		$config['upload_path'] = 'assets/images/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = '2048000';
+		
+		$this->load->library('upload', $config);
+		
 		if (isset($_FILES['foto']) AND $_FILES['foto']['tmp_name'] != "") {
-			$config['upload_path'] = 'assets/images/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size'] = '2048000';
-			
-			$this->load->library('upload', $config);
 			if($this->upload->do_upload('foto'))
 			{
 				$data = array('upload_data' => $this->upload->data());
@@ -286,31 +341,68 @@ class admin extends CI_Controller {
 			}
 		}
 		
-		$this->load->model('Kuliner_model');
-		if ($foto == "") {
-			$data = array(
-					'nama_kuliner' => $nama,
-					'deskripsi_kuliner' => $deskripsi,
-					'menu_andalan' => $menu,
-					'kisaran_harga' => $kisaran,
-					'alamat' => $alamat,
-					'id_kategori' => $kategori,
-					'lat_kuliner' => $lat,
-					'lng_kuliner' => $lng,
-				);
-		} else {
-			$data = array(
-					'nama_kuliner' => $nama,
-					'deskripsi_kuliner' => $deskripsi,
-					'menu_andalan' => $menu,
-					'kisaran_harga' => $kisaran,
-					'alamat' => $alamat,
-					'foto_kuliner' => $foto,
-					'id_kategori' => $kategori,
-					'lat_kuliner' => $lat,
-					'lng_kuliner' => $lng,
-				);
+		if (isset($_FILES['foto2']) AND $_FILES['foto2']['tmp_name'] != "") {
+			if($this->upload->do_upload('foto2'))
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$foto2 = $data['upload_data']['file_name'];
+			}
+			else
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('msg', print_r($error, true));
+				redirect('admin/tambah_kuliner');
+				exit();
+			}
 		}
+		
+		if (isset($_FILES['foto3']) AND $_FILES['foto3']['tmp_name'] != "") {
+			if($this->upload->do_upload('foto3'))
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$foto3 = $data['upload_data']['file_name'];
+			}
+			else
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('msg', print_r($error, true));
+				redirect('admin/tambah_kuliner');
+				exit();
+			}
+		}
+		
+		if (isset($_FILES['foto4']) AND $_FILES['foto4']['tmp_name'] != "") {
+			if($this->upload->do_upload('foto4'))
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$foto4 = $data['upload_data']['file_name'];
+			}
+			else
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('msg', print_r($error, true));
+				redirect('admin/tambah_kuliner');
+				exit();
+			}
+		}
+		
+		$this->load->model('Kuliner_model');
+		$data = array(
+				'nama_kuliner' => $nama,
+				'deskripsi_kuliner' => $deskripsi,
+				'menu_andalan' => $menu,
+				'kisaran_harga' => $kisaran,
+				'alamat' => $alamat,
+				'id_kategori' => $kategori,
+				'lat_kuliner' => $lat,
+				'lng_kuliner' => $lng,
+			);
+		
+		
+		if ($foto != "") $data['foto_kuliner1'] = $foto;
+		if ($foto2 != "") $data['foto_kuliner2'] = $foto2;
+		if ($foto3 != "") $data['foto_kuliner3'] = $foto3;
+		if ($foto4 != "") $data['foto_kuliner4'] = $foto4;
 
 		$result = $this->Kuliner_model->update($data, $id);
 		if ($result) {
